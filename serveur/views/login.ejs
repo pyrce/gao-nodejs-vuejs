@@ -1,0 +1,23 @@
+<%- include ('partials/head.ejs') %>
+<div id="form"  class="d-flex container justify-content-center align-conntent-center">
+
+<div class="d-flex flex-column justify-content-center align-conntent-center" id="login">
+    <form action="/users/login" method="POST">
+<div class="form-group">
+    <label for="email1">login</label>
+    <input type="text" class="form-control" name="login" id="email" aria-describedby="loginHelp" placeholder="Enter login" required>
+    <small id="email" name="email"  class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+  </div>
+
+  <button id="valider" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+</div>
+
+  <%- include ('partials/script.ejs') %>

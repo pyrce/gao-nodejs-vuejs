@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include ('partials/head.ejs') %>
+</head>
+<body>
+    
+    <div id="content" class="container">
+        <a href="/users/logout">Déconnexion</a> <br>
+
+        <div class="row">
+   <input type="date" name="jour" class="" id="jour"> <button id="ajout_poste" class="btn-small btn-info ">Ajouter un poste</button>
+   </div>
+    <div class="msg"></div>
+<div class="d-flex flex-md-row flex-xs-column flex-warp justify-content-between row row-xs-12" id="postes">
+    <% for(let p in postes){ %>
+        <div class="card col-md-4 col-xs-12 poste">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">  <%= postes[p].nom %> 
+            
+                    <button class="btn btn-danger d-flex flex-row justify-content-around delete_poste" data-id="<%= postes[p].id %>" > 
+                        <i class="fas fa-trash-alt"></i> 
+                    </button>
+                </h5>           
+                       <% for(var i=8;i<19;i++ ){ %>
+                      
+<span  class="row d-flex justify-content-between heures"> <%=i %> h 
+     <%
+     h=(i<10) ? '0'+i :i;
+    ordi=attributions.filter(o=>{return o.posteId==postes[p].id} );
+  t=  ordi.filter( x=>{ return x.heure.match([h])} );
+  if(t.length>0){
+     %>
+      <%=t[0].client.nom%>  <%=t[0].client.prenom%> <button class="btn-small btn-warning remove" data-id="<%=t[0].id %>" > <i class="fas fa-trash-alt"></i></button>
+  <%}else{ %>
+   <button class="btn-small btn-info add" data-heure="<%=h%>" data-poste="<%= postes[p].id%>"><i class="fas fa-plus-circle"></i></button> 
+  <%}
+     %> 
+    </span>                
+        <%} %>   
+              </div>
+</div>
+        <%}%>
+</div>
+
+
+</div>
+<div id="myModal" class="modal" onload="getusers()">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span><div style="width: 100%;">
+        <input type="text" list="users" id="user" value="" name="user" style="width: 95%;"><button class="btn-small btn-info" id="add_user" required><i class="fas fa-plus-circle"></i></button>
+</div>
+        <button class="btn-small btn-info" id="attribuer">Attribuer  </button>
+        <datalist id="users">
+    
+        </datalist>
+    </div>
+  </div>
+
+  <div id="myModal2" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+        <input type="text" id="poste" value="" name="poste" >
+        <button class="btn-small btn-info" id="addposte">Ajout poste</button>
+  
+    </div>
+  </div>
+  <div id="modal_user" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+        Nom  <input type="text" id="nom_client" value=""  > <br>
+        Prénom <input type="text" id="prenom_client" value=""  >
+        <button class="btn-small btn-info" id="adduser">Ajout client</button>
+  
+    </div>
+  </div>
+
+  <div id="modif_poste" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+        Nom  <input type="text" id="nom_poste" value=""  > <br>
+  
+    </div>
+  </div>
+
+ <%- include('partials/script.ejs') %>
+<script src="/js/script.js">
+</script>
+
+
+</body>
+</html>
